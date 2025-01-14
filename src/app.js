@@ -18,17 +18,17 @@ app.use("/uploads", express.static("uploads"));
 
 dotenv.config();
 
-// app.use(
-//     session({
-//         secret: process.env.SECRET_SESSION,
-//         resave: false,
-//         saveUninitialized: false,
-//         cookie: {
-//             maxAge: 30 * 60 * 1000,
-//             secure: false,
-//         },
-//     })
-// );
+app.use(
+    session({
+        secret: process.env.SECRET_SESSION,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 30 * 60 * 1000,
+            secure: false,
+        },
+    })
+);
 
 app.use(routers);
 
