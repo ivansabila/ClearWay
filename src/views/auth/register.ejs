@@ -20,13 +20,13 @@
                 </div>
                 <form class="flex flex-col gap-2 w-full" action="/register" method="post">
                     <div class="name flex flex-col gap-1">
-                        <label class="font-base text-sm font-semibold text-brown" for="username">Nama Lengkap</label>
+                        <label class="font-base text-sm font-semibold text-brown" for="full_name">Nama Lengkap</label>
                         <input
-                            class="border text-sm font-base text-brown bg-transparent outline-none h-10 px-4 <% if (error.username) { %> border-red-500 <% } else { %> border-slate-300 <% } %> focus:outline-maroon/50 focus:outline-[3px]"
-                            type="text" name="username" id="username" placeholder="Nama Sesuai KTP" required
-                            autocomplete="off" autofocus value="<%= oldData.username%>">
+                            class="border text-sm font-base text-brown bg-transparent outline-none h-10 px-4 <% if (error.full_name) { %> border-red-500 <% } else { %> border-slate-300 <% } %> focus:outline-maroon/50 focus:outline-[3px]"
+                            type="text" name="full_name" id="full_name" placeholder="Nama Sesuai KTP" required
+                            autocomplete="off" autofocus value="<%= oldData.full_name%>">
                         <p class="text-xs font-base font-medium text-red-500 leading-4">
-                            <%= error.username %>
+                            <%= error.full_name %>
                         </p>
                     </div>
                     <div class="email flex flex-col gap-1">

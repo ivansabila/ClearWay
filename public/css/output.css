@@ -1446,6 +1446,10 @@ video {
   stroke: #fff;
 }
 
+.group:hover .group-hover\:font-medium {
+  font-weight: 500;
+}
+
 .group:hover .group-hover\:text-brown {
   --tw-text-opacity: 1;
   color: rgb(47 62 55 / var(--tw-text-opacity, 1));
