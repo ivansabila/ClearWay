@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
+
+<body class="bg-slate-100">
+    <div class="mainContainer w-screen h-screen bg-slate-100 flex flex-row justify-between">
+        <div class="mainContain w-1/2 flex flex-col justify-center items-center">
+            <div class="flex flex-col justify-center items-center gap-4 w-1/2">
+                <img class="w-10 h-10" src="/images/img/img_logo.png" alt="">
+                <div class="heroTitle flex flex-col justify-center items-center gap-3">
+                    <h1
+                        class="title text-4xl font-base text-center font-bold text-brown relative after:content-[''] after:ml-2 after:absolute after:bottom-1 after:h-9 after:w-9 after:bg-fingers after:bg-cover">
+                        Selamat Datang</h1>
+                    <h1 class="desc text-[15px] font-base font-medium text-center leading-5 text-brown/60">
+                        Untuk
+                        mendapatkan pengalaman menarik, silahkan daftarkan akun anda terlebih dahulu.</h1>
+                </div>
+                <form class="flex flex-col gap-2 w-full" action="/register" method="post">
+                    <div class="name flex flex-col gap-1">
+                        <label class="font-base text-sm font-semibold text-brown" for="username">Nama Lengkap</label>
+                        <input
+                            class="border text-sm font-base text-brown bg-transparent outline-none h-10 px-4 <% if (error.username) { %> border-red-500 <% } else { %> border-slate-300 <% } %> focus:outline-maroon/50 focus:outline-[3px]"
+                            type="text" name="username" id="username" placeholder="Nama Sesuai KTP" required
+                            autocomplete="off" autofocus value="<%= oldData.username%>">
+                        <p class="text-xs font-base font-medium text-red-500 leading-4">
+                            <%= error.username %>
+                        </p>
+                    </div>
+                    <div class="email flex flex-col gap-1">
+                        <label class="font-base text-sm font-semibold text-brown" for="email">Email</label>
+                        <input
+                            class="border text-sm font-base text-brown bg-transparent outline-none h-10 px-4 <% if (error.email) { %> border-red-500 <% } else { %> border-slate-300 <% } %> focus:outline-maroon/50 focus:outline-[3px]"
+                            type="email" name="email" id="email" placeholder="contoh@gmail.com" required
+                            autocomplete="off" value="<%= oldData.email %>">
+                        <p class="text-xs font-base font-medium text-red-500 leading-4">
+                            <%= error.email %>
+                        </p>
+                    </div>
+                    <div class="phone flex flex-col gap-1">
+                        <label class="font-base text-sm font-semibold text-brown" for="phone">Nomor HP</label>
+                        <input
+                            class="border text-sm font-base text-brown bg-transparent outline-none h-10 px-4 <% if (error.phone) { %> border-red-500 <% } else { %> border-slate-300  <% } %> focus:outline-maroon/50 focus:outline-[3px] "
+                            type="text" name="phone" id="phone" placeholder="Nomor Aktif Whatsapp" required
+                            autocomplete="off" value="<%= oldData.phone %>">
+                        <p class="text-xs font-base font-medium text-red-500 leading-4">
+                            <%= error.phone %>
+                        </p>
+                    </div>
+                    <div class="password flex flex-col gap-1">
+                        <label class="font-base text-sm font-semibold text-brown" for="password">Password</label>
+                        <div
+                            class="passwordContent w-full h-10 border <% if (error.password) { %> border-red-500 <% } else { %> border-slate-300  <% } %> flex flex-row px-4 items-center justify-between gap-2 outline-none">
+                            <input
+                                class="test text-sm font-base text-brown bg-transparent outline-none transition-all ease-in w-full"
+                                type="password" name="password" id="password" placeholder="Minimal 8 Karakter" required
+                                autocomplete="off">
+                            <img class="h-6 cursor-pointer" id="showHide" src="/images/icons/ic_eye.svg" alt="">
+                        </div>
+                        <p class="text-xs font-base font-medium text-red-500 leading-4">
+                            <%= error.password %>
+                        </p>
+                    </div>
+                    <div class="cta flex flex-col gap-1">
+                        <button
+                            class="text-sm font-medium font-base text-white bg-brown outline-none h-10 px-4 mt-4 hover:bg-rose-500 active:bg-rose-600 focus:bg-maroon"
+                            type="submit">Buat Akun</button>
+                        <p class="text-xs font-base font-normal text-brown/60 leading-4">Dengan mendaftar,
+                            Anda
+                            menyetujui <span class="text-maroon font-semibold">persyaratan layanan<br>dan
+                                kebijakan
+                                privasi,</span>
+                            termasuk penggunaan cookies</p>
+                    </div>
+                </form>
+                <div class="flex flex-row gap-2">
+                    <p class="text-[13px] font-base font-medium text-brown/60">Apakah anda sudah punya akun ?
+                    </p>
+                    <a class="text-[13px] font-base font-semibold text-maroon underline underline-offset-4 decoration-1 hover:decoration-2 hover:text-brown"
+                        href="/login">Masuk</a>
+                </div>
+            </div>
+        </div>
+        <div
+            class="extrasContain w-1/2 bg-cover flex flex-col gap-6 items-center justify-center border-l border-slate-200" style="background-image: url(/images/img/img_extras.png)">
+        </div>
+    </div>
+    <script src="/js/show_hide_password.js"></script>
+</body>
+
+</html>

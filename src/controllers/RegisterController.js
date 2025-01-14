@@ -1,6 +1,6 @@
 class RegisterController {
     static async index(req, res) {
-        res.render("./");
+        res.render("./auth/register", { error: {}, oldData: {} });
     }
 }
 
