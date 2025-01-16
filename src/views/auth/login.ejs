@@ -19,7 +19,7 @@
                 </div>
                 <form class="flex flex-col gap-2 w-full" action="/login" method="post">
                     <div class="name flex flex-col gap-1">
-                        <label class="font-base text-sm font-semibold text-brown" for="user">Nama Lengkap</label>
+                        <label class="font-base text-sm font-semibold text-brown after:content-['*'] after:text-maroon after:ml-0.5" for="user">Nama Lengkap</label>
                         <input
                             class="border text-sm font-base text-brown bg-transparent outline-none h-10 px-4 <% if (error) { %> border-red-500 <% } else { %> border-slate-300 <% } %> focus:outline-[3px] focus:outline-maroon/50"
                             type="text" name="user" id="user" placeholder="Nama Sesuai KTP atau Email" required
@@ -30,7 +30,7 @@
 
                     </div>
                     <div class="password flex flex-col gap-1">
-                        <label class="font-base text-sm font-semibold text-brown" for="password">Password</label>
+                        <label class="font-base text-sm font-semibold text-brown after:content-['*'] after:text-maroon after:ml-0.5" for="password">Password</label>
                         <div
                             class="passwordContent w-full h-10 border border-slate-300 flex flex-row px-4 items-center justify-between gap-2 outline-none">
                             <input

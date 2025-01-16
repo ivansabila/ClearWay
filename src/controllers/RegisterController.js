@@ -8,7 +8,7 @@ class RegisterController {
     static async store(req, res) {
         // destructure body and create "objUser" object
         const { full_name, email, phone, password } = req.body;
-        const image = "/uploads/default.png";
+        const image = "/uploads/images/default.png";
         const role = "user";
         const objUser = { full_name, email, phone, password, image, role };
 

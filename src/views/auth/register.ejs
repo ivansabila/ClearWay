@@ -20,7 +20,7 @@
                 </div>
                 <form class="flex flex-col gap-2 w-full" action="/register" method="post">
                     <div class="name flex flex-col gap-1">
-                        <label class="font-base text-sm font-semibold text-brown" for="full_name">Nama Lengkap</label>
+                        <label class="font-base text-sm font-semibold text-brown after:content-['*'] after:text-maroon after:ml-0.5" for="full_name">Nama Lengkap</label>
                         <input
                             class="border text-sm font-base text-brown bg-transparent outline-none h-10 px-4 <% if (error.full_name) { %> border-red-500 <% } else { %> border-slate-300 <% } %> focus:outline-maroon/50 focus:outline-[3px]"
                             type="text" name="full_name" id="full_name" placeholder="Nama Sesuai KTP" required
@@ -30,7 +30,7 @@
                         </p>
                     </div>
                     <div class="email flex flex-col gap-1">
-                        <label class="font-base text-sm font-semibold text-brown" for="email">Email</label>
+                        <label class="font-base text-sm font-semibold text-brown after:content-['*'] after:text-maroon after:ml-0.5" for="email">Email</label>
                         <input
                             class="border text-sm font-base text-brown bg-transparent outline-none h-10 px-4 <% if (error.email) { %> border-red-500 <% } else { %> border-slate-300 <% } %> focus:outline-maroon/50 focus:outline-[3px]"
                             type="email" name="email" id="email" placeholder="contoh@gmail.com" required
@@ -40,7 +40,7 @@
                         </p>
                     </div>
                     <div class="phone flex flex-col gap-1">
-                        <label class="font-base text-sm font-semibold text-brown" for="phone">Nomor HP</label>
+                        <label class="font-base text-sm font-semibold text-brown after:content-['*'] after:text-maroon after:ml-0.5" for="phone">Nomor HP</label>
                         <input
                             class="border text-sm font-base text-brown bg-transparent outline-none h-10 px-4 <% if (error.phone) { %> border-red-500 <% } else { %> border-slate-300  <% } %> focus:outline-maroon/50 focus:outline-[3px] "
                             type="text" name="phone" id="phone" placeholder="Nomor Aktif Whatsapp" required
@@ -50,7 +50,7 @@
                         </p>
                     </div>
                     <div class="password flex flex-col gap-1">
-                        <label class="font-base text-sm font-semibold text-brown" for="password">Password</label>
+                        <label class="font-base text-sm font-semibold text-brown after:content-['*'] after:text-maroon after:ml-0.5" for="password">Password</label>
                         <div
                             class="passwordContent w-full h-10 border <% if (error.password) { %> border-red-500 <% } else { %> border-slate-300  <% } %> flex flex-row px-4 items-center justify-between gap-2 outline-none">
                             <input

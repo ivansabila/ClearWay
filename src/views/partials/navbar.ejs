@@ -8,19 +8,43 @@
     </div>
     <div class="flex items-center justify-between px-4 flex-auto">
         <div class="flex items-center">
-            <svg class="stroke-maroon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-inbox">
-                <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
-                <path
-                    d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
-            </svg>
-            <h1 class="text-base font-medium text-left pl-3 titleSidebar font-base text-brown flex-auto">
-                Pengajuan</h1>
+            <% if (active=="book" ) { %>
+                <svg class="stroke-maroon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-inbox">
+                    <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+                    <path
+                        d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+                </svg>
+                <h1 class="text-base font-medium text-left pl-3 titleSidebar font-base text-brown flex-auto">
+                    Pengajuan</h1>
+                <% } else if (active=="profile" ) { %>
+                        <svg class="stroke-maroon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-user-pen">
+                            <path d="M11.5 15H7a4 4 0 0 0-4 4v2" />
+                            <path
+                                d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+                            <circle cx="10" cy="7" r="4" />
+                        </svg>
+                    </svg>
+                    <h1 class="text-base font-medium text-left pl-3 titleSidebar font-base text-brown flex-auto">
+                        Profil</h1>
+                    <% } else if (active=="history" ) { %>
+                        <svg class="stroke-maroon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="#999999" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-history">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                            <path d="M3 3v5h5" />
+                            <path d="M12 7v5l4 2" />
+                        </svg>
+                        <h1 class="text-base font-medium text-left pl-3 titleSidebar font-base text-brown flex-auto">
+                            Riwayat</h1>
+                        <% } %>
         </div>
         <a class="p-1 hover:bg-slate-300" href="">
-            <img class="object-cover border rounded-full w-6 h-6 border-slate-200 bg-blueSky"
-                src="images/img/img_default.png" alt="">
+            <img class="object-cover border rounded-full w-6 h-6 border-slate-200 bg-blueSky" src="<%= user.image %>"
+                alt="">
         </a>
     </div>
 </nav>

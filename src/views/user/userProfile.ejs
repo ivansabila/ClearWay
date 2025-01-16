@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body class="bg-slate-100">
+    <div class="flex flex-col justify-between mainContainer bg-slate-100">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 flex-auto p-8 gap-10">
+                        <div class="flex justify-between">
+                            <div class="flex flex-col">
+                                <h1 class="text-3xl font-semibold text-left font-base text-brown">
+                                    Data Diri</h1>
+                                <p class="text-sm font-medium font-base text-brown/60">Pastikan semua data diri anda
+                                    sesuai dengan data KTP anda</p>
+                            </div>
+                            <a
+                                class="group w-fit h-10 border border-slate-300 px-4 py-1 flex flex-row gap-2 cursor-pointer items-center hover:bg-maroon" href="/profile/<%= user.id %>/edit">
+                                <svg class="stroke-maroon group-hover:stroke-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-pencil">
+                                    <path
+                                        d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                    <path d="m15 5 4 4" />
+                                </svg>
+                                <p class="text-sm font-medium font-base text-brown group-hover:text-white">
+                                    Ubah Profil</p>
+                            </a>
+                        </div>
+                        <div class="flex flex-col gap-10">
+                            <div class="border border-slate-300 p-6 flex flex-col gap-8">
+                                <h1 class="text-2xl font-semibold text-left font-base text-brown">Data Pribadi</h1>
+                                <div class="flex flex-col gap-6">
+                                    <div class="nik flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <h1
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                NIK</h1>
+                                            <p class="text-sm font-medium font-base text-brown/60">Nomor Identitas
+                                                Penduduk,
+                                                terdiri atas 16
+                                                digit angka</p>
+                                        </div>
+                                        <input
+                                            class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                            disabled type="text" name="nik" id="nik" placeholder="" required
+                                            autocomplete="off" value="<%= user.nik %>">
+                                    </div>
+                                    <div class="full_name flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <h1
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Nama Lengkap</h1>
+                                        </div>
+                                        <input
+                                            class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                            disabled type="text" name="full_name" id="full_name" placeholder="" required
+                                            autocomplete="off" value="<%= user.full_name %>">
+                                    </div>
+                                    <div class="birthplace flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <h1
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Tempat Lahir</h1>
+                                            <p class="text-sm font-medium font-base text-brown/60">Tempat lahir sesuai
+                                                KTP
+                                            </p>
+                                        </div>
+                                        <input
+                                            class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                            disabled type="text" name="birthplace" id="birthplace" placeholder=""
+                                            required autocomplete="off" value="<%= user.birthplace %>">
+                                    </div>
+                                    <div class="birthdate flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <h1
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Tanggal Lahir</h1>
+                                        </div>
+                                        <input
+                                            class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                            disabled type="text" name="birthdate" id="birthdate" placeholder="" required
+                                            autocomplete="off" value="<%= user.birthdate %>">
+                                    </div>
+                                    <div class="address flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <h1
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Alamat</h1>
+                                            <p class="text-sm font-medium font-base text-brown/60">Alamat sesuai KTP
+                                            </p>
+                                        </div>
+                                        <input
+                                            class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                            disabled type="text" name="address" id="address" placeholder="" required
+                                            autocomplete="off" value="<%= user.address %>">
+                                    </div>
+                                    <div class="district flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <h1
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Kecamatan</h1>
+                                            <p class="text-sm font-medium font-base text-brown/60">Kecamatan sesuai KTP
+                                            </p>
+                                        </div>
+                                        <input
+                                            class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                            disabled type="text" name="district" id="district" placeholder="" required
+                                            autocomplete="off" value="<%= user.district %>">
+                                    </div>
+                                    <div class="subdistrict flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <h1
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Kelurahan</h1>
+                                            <p class="text-sm font-medium font-base text-brown/60">Kelurahan sesuai KTP
+                                            </p>
+                                        </div>
+                                        <input
+                                            class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                            disabled type="text" name="subdistrict" id="subdistrict" placeholder=""
+                                            required autocomplete="off" value="<%= user.subdistrict %>">
+                                    </div>
+                                    <div class="religion flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <h1
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Agama</h1>
+                                        </div>
+                                        <input
+                                            class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                            disabled type="text" name="religion" id="religion" placeholder="" required
+                                            autocomplete="off" value="<%= user.religion %>">
+                                    </div>
+                                    <div class="job flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <h1
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Pekerjaan</h1>
+                                            <p class="text-sm font-medium font-base text-brown/60">Pekerjaan sesuai KTP
+                                            </p>
+                                        </div>
+                                        <input
+                                            class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                            disabled type="text" name="job" id="job" placeholder="" required
+                                            autocomplete="off" value="<%= user.job %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border border-slate-300 p-6 flex flex-col gap-8">
+                                <h1 class="text-2xl font-semibold text-left font-base text-brown">Bukti Data Pribadi
+                                </h1>
+                                <div class="nik flex justify-between items-start gap-40">
+                                    <div class="flex flex-col w-60">
+                                        <h1
+                                            class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                            Fotocopi KTP</h1>
+                                        <p class="text-sm font-medium font-base text-brown/60">Fotokopi KTP depan dan
+                                            belakang dengan data yang tertera di atas, format .pdf</p>
+                                    </div>
+                                    <div class="border border-slate-300 flex h-10 flex-auto items-center gap-2">
+                                        <svg class="stroke-maroon w-10 h-10 p-2 border-r border-slate-300"
+                                            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-paperclip">
+                                            <path d="M13.234 20.252 21 12.3" />
+                                            <path
+                                                d="m16 6-8.414 8.586a2 2 0 0 0 0 2.828 2 2 0 0 0 2.828 0l8.414-8.586a4 4 0 0 0 0-5.656 4 4 0 0 0-5.656 0l-8.415 8.585a6 6 0 1 0 8.486 8.486" />
+                                        </svg>
+                                        <p class="text-sm font-base text-brown"><%= user.ktp.split('/').splice(-1).toString() %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</body>
+
+</html>

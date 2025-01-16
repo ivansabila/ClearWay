@@ -65,6 +65,35 @@ class User {
             return { user, error };
         }
     }
+
+    static async show(id) {
+        const query = "SELECT * FROM users WHERE id = $1";
+
+        let data = await db.query(query, [id]);
+
+        return data.rows[0];
+    }
+
+    static async update(objUser) {
+        const checkQuery = "SELECT * FROM users WHERE nik = $2 AND id <> $1";
+        const query = "UPDATE users SET nik = $2, full_name = $3, birthplace = $4, birthdate = $5, address = $6, district = $7, subdistrict = $8, religion = $9, job = $10, ktp = $11 WHERE id = $1";
+
+        let arrData = [objUser.id, objUser.nik, objUser.full_name, objUser.birthplace, objUser.birthdate, objUser.address, objUser.district, objUser.subdistrict, objUser.religion, objUser.job, objUser.ktp];
+
+        let check = await db.query(checkQuery, [objUser.id, objUser.nik]);
+
+        if (check.rows.length > 0) {
+            let error = "Isi NIK anda dengan benar";
+            return error;
+        } else {
+            arrData[2] = capitalize(arrData[2]);
+            arrData[3] = capitalize(arrData[3]);
+            arrData[5] = capitalize(arrData[5]);
+
+            await db.query(query, arrData);
+        }
+
+    }
 }
 
 module.exports = User;

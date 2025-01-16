@@ -25,12 +25,11 @@ class LoginController {
                 birthplace: data.user.birthplace,
                 birthdate: data.user.birthdate,
                 address: data.user.address,
-                sex: data.user.sex,
                 district: data.user.district,
                 subdistrict: data.user.subdistrict,
                 religion: data.user.religion,
                 job: data.user.job,
-                imagektp: data.user.imagektp,
+                ktp: data.user.ktp,
             };
 
             return res.redirect("/");
