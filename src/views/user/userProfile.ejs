@@ -177,9 +177,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="toast" class="hidden fixed border border-slate-300 p-4 -bottom-20 right-0 w-full bg-green-500 text-base text-center font-base text-white transition-all duration-500">
+                            <%= message %>
+                        </div>
                     </div>
             </div>
     </div>
+    <script>
+        const toastMessage = "<%= message %>"
+    </script>
+    <script src="/js/toast.js"></script>
 </body>
 
 </html>

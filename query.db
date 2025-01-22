@@ -22,15 +22,31 @@ CREATE TABLE users (
 	image VARCHAR(100) NOT NULL,
 	role VARCHAR(50) NOT NULL,
 	nik VARCHAR(100),
-	birthPlace VARCHAR(100),
-	birthDate VARCHAR(100),
+	birthplace VARCHAR(100),
+	birthdate VARCHAR(100),
 	address VARCHAR(100), 
-	sex CHAR(1),
 	district VARCHAR(100),
-	subDistrict VARCHAR(100),
+	subdistrict VARCHAR(100),
 	religion VARCHAR(100),
 	job VARCHAR(100),
-	imageKTP VARCHAR(100),
+	ktp VARCHAR(100),
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+CREATE TABLE books (
+	id SERIAL PRIMARY KEY,
+	id_user NUMERIC,
+	title VARCHAR(100),
+	description VARCHAR(250),
+	status VARCHAR(50),
+	participant VARCHAR(50),
+	event VARCHAR(50),
+	location TEXT,
+	startdate VARCHAR(100),
+	enddate VARCHAR(100),
+	starttime VARCHAR(100),
+	endtime VARCHAR(100),
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )

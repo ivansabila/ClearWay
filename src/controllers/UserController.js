@@ -8,7 +8,10 @@ class UserController {
         if (id == req.session.user.id) {
             const data = await User.show(id);
 
-            res.render("./user/userProfile", { data: data, active: "profile" });
+            let message = req.session.user.message;
+            req.session.user.message = null;
+
+            res.render("./user/userProfile", { message: message, data: data, active: "profile" });
         } else {
             res.redirect(`/profile/${req.session.user.id}`);
         }
@@ -37,25 +40,25 @@ class UserController {
         const id = req.session.user.id;
         const objUser = { id, nik, full_name, birthplace, birthdate, address, district, subdistrict, religion, job, ktp };
 
-        console.log("🚀 ~ UserController ~ update ~ objUser:", objUser);
-
-        req.session.user.nik = objUser.nik;
-        req.session.user.full_name = capitalize(objUser.full_name);
-        req.session.user.birthplace = capitalize(objUser.birthplace);
-        req.session.user.birthdate = objUser.birthdate;
-        req.session.user.address = capitalize(objUser.address);
-        req.session.user.district = objUser.district;
-        req.session.user.subdistrict = objUser.subdistrict;
-        req.session.user.religion = objUser.religion;
-        req.session.user.job = objUser.job;
-        req.session.user.ktp = objUser.ktp;
-
         const errors = await User.update(objUser);
 
         if (errors) {
             error.nik = errors;
             return res.render("./user/userProfileEdit", { error: error, oldData: req.body, active: "profile" });
         } else {
+            req.session.user.nik = objUser.nik;
+            req.session.user.full_name = capitalize(objUser.full_name);
+            req.session.user.birthplace = capitalize(objUser.birthplace);
+            req.session.user.birthdate = objUser.birthdate;
+            req.session.user.address = capitalize(objUser.address);
+            req.session.user.district = objUser.district;
+            req.session.user.subdistrict = objUser.subdistrict;
+            req.session.user.religion = objUser.religion;
+            req.session.user.job = objUser.job;
+            req.session.user.ktp = objUser.ktp;
+
+            req.session.user.message = "Ubah profil berhasil";
+
             return res.redirect(`/profile/${req.session.user.id}`);
         }
     }

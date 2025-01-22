@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+
+<body class="bg-slate-100">
+    <form action="/book/<%= user.id %>" method="post">
+        <div class="flex flex-col justify-between mainContainer bg-slate-100">
+            <%- include("../partials/navbar.ejs") %>
+                <div class="flex">
+                    <%- include("../partials/sidebar.ejs") %>
+                        <div class="flex flex-col ml-72 flex-auto p-8 gap-10">
+                            <div class="flex justify-between">
+                                <div class="flex flex-col">
+                                    <h1 class="text-3xl font-semibold text-left titleSidebar font-base text-brown">
+                                        Membuat Izin Pengajuan</h1>
+                                    <p class="text-sm font-medium font-base text-brown/60">Anda bertanggung jawab
+                                        sepenuhnya terhadap seluruh izin pengajuan yang anda ajukan</p>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a class="group w-fit h-10 border border-slate-300 px-4 py-1 flex flex-row gap-2 cursor-pointer items-center hover:bg-brown"
+                                        href="/">
+                                        <p class="text-sm font-medium font-base text-brown group-hover:text-white">
+                                            Batal</p>
+                                    </a>
+                                    <button
+                                        class="group w-fit h-10 border border-slate-300 px-4 py-1 flex flex-row gap-2 cursor-pointer items-center bg-brown hover:bg-maroon"
+                                        type="submit">
+
+                                        <svg class="stroke-white" xmlns="http://www.w3.org/2000/svg" width="18"
+                                            height="18" viewBox="0 0 24 24" fill="none" stroke="#999999"
+                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-file-plus-2">
+                                            <path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4" />
+                                            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                            <path d="M3 15h6" />
+                                            <path d="M6 12v6" />
+                                        </svg>
+                                        <p class="text-sm font-medium font-base text-white">
+                                            Buat Izin Pengajuan</p>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-10">
+                                <div class="border border-slate-300 p-6 flex flex-col gap-8">
+                                    <h1 class="text-2xl font-semibold text-left font-base text-brown">Data Pengajuan
+                                    </h1>
+                                    <div class="flex flex-col gap-6">
+                                        <div class="title flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <label
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                    for="title">
+                                                    Judul pengajuan</label>
+                                                <p class="text-sm font-medium font-base text-brown/60">Nama kegiatan
+                                                    yang
+                                                    akan dilaksanakan</p>
+                                            </div>
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <input
+                                                    class="border <% if (error.title) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 px-4 focus:outline-maroon/50 focus:outline-[3px]"
+                                                    type="text" name="title" id="title" placeholder="" required
+                                                    autofocus autocomplete="off"
+                                                    value="<%= oldData.title || user.title %>">
+                                                <p class="text-xs font-base font-medium text-red-500 leading-4">
+                                                    <%= error.title %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="description flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <label
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                    for="description">
+                                                    Deskripsi pengajuan</label>
+                                                <p class="text-sm font-medium font-base text-brown/60">Deskripsi
+                                                    kegiatan
+                                                    yang
+                                                    akan dilaksanakan</p>
+                                            </div>
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <textarea id="description" name="description" rows="3" maxlength="250"
+                                                    oninput="updateCharCount()"
+                                                    class="border <% if (error.description) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none px-4 py-2 min-h-12 max-h-40 focus:outline-maroon/50 focus:outline-[3px]"><%= oldData.description || user.description %></textarea>
+                                                <div class="flex justify-between flex-row-reverse">
+                                                    <p id="charCount"
+                                                        class="text-xs font-base font-medium text-brown leading-4">
+                                                        0/250
+                                                    </p>
+                                                    <p class="text-xs font-base font-medium text-red-500 leading-4">
+                                                        <%= error.description %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="participant flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <label
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                    for="participant">
+                                                    Jumlah Peserta</label>
+                                                <p class="text-sm font-medium font-base text-brown/60">Perkiraan jumlah
+                                                    peserta yang hadir pada kegiatan, format tanpa titik (.) dan koma
+                                                    (,)</p>
+                                            </div>
+                                            <div class="flex flex-col flex-auto gap-2">
+                                                <div class="flex flex-col flex-auto gap-1">
+                                                    <div id="participantContainer"
+                                                        class="border <% if (error.participant) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 flex-auto flex items-center focus:outline-maroon/50 focus:outline-[3px]">
+                                                        <input
+                                                            class="text-sm font-base text-brown bg-transparent outline-none h-10 w-full px-4"
+                                                            type="text" name="participant" id="participant"
+                                                            placeholder="" required autofocus autocomplete="off"
+                                                            value="<%= oldData.participant || user.participant %>">
+                                                        <div
+                                                            class="text-sm font-base text-brown px-4 border-l border-slate-300 h-10 leading-10">
+                                                            Peserta</div>
+
+                                                    </div>
+                                                    <p class="text-xs font-base font-medium text-red-500 leading-4">
+                                                        <%= error.participant %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="event flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <label
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                    for="event">
+                                                    Jenis Kegiatan</label>
+                                                <p class="text-sm font-medium font-base text-brown/60">Pilih jenis
+                                                    kegiatan
+                                                    yang sesuai</p>
+                                            </div>
+                                            <select
+                                                class="border <% if (error.event) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                                name="event" id="event" required>
+                                                <option value="" disabled <%=!(oldData.event || user.event) ? 'selected'
+                                                    : '' %>>-- Pilih Jenis Kegiatan --
+                                                </option>
+                                                <option value="Kegiatan Konstruksi" <%=(oldData.event ||
+                                                    user.event)==='Kegiatan Konstruksi' ? 'selected' : '' %>
+                                                    title="Kegiatan
+                                                    Konstruksi: pembangunan gedung, jembatan, atau infrastruktur
+                                                    lainnya">Kegiatan Konstruksi</option>
+                                                <option value="Kegiatan Pemeliharaan Jalan" <%=(oldData.event ||
+                                                    user.event)==='Kegiatan Pemeliharaan Jalan' ? 'selected' : '' %>
+                                                    title="Kegiatan Pemeliharaan Jalan: pekerjaan perbaikan,
+                                                    pemeliharaan,
+                                                    atau pengaspalan jalan">Kegiatan Pemeliharaan Jalan</option>
+                                                <option value="Acara Publik" <%=(oldData.event ||
+                                                    user.event)==='Acara Publik' ? 'selected' : '' %> title="Acara
+                                                    Publik:
+                                                    kegiatan seperti festival, konser, pameran, atau acara
+                                                    olahraga">Acara
+                                                    Publik</option>
+                                                <option value="Kegiatan Sosial" <%=(oldData.event ||
+                                                    user.event)==='Kegiatan Sosial' ? 'selected' : '' %> title="Kegiatan
+                                                    Sosial: kegiatan sosial seperti jalan sehat, parade, atau
+                                                    demonstrasi">Kegiatan Sosial</option>
+                                                <option value="Kegiatan Perayaan" <%=(oldData.event ||
+                                                    user.event)==='Kegiatan Perayaan' ? 'selected' : '' %>
+                                                    title="Kegiatan
+                                                    Perayaan: perayaan hari besar, seperti perayaan tahun baru, hari
+                                                    kemerdekaan, atau perayaan keagamaan">Kegiatan Perayaan</option>
+                                                <option value="Kegiatan Penanganan Bencana" <%=(oldData.event ||
+                                                    user.event)==='Kegiatan Penanganan Bencana' ? 'selected' : '' %>
+                                                    title="Kegiatan Penanganan Bencana: kegiatan yang berkaitan dengan
+                                                    penanganan bencana, seperti evakuasi atau distribusi
+                                                    bantuan">Kegiatan
+                                                    Penanganan Bencana</option>
+                                                <option value="Kegiatan Infrastruktur" <%=(oldData.event ||
+                                                    user.event)==='Kegiatan Infrastruktur' ? 'selected' : '' %>
+                                                    title="Kegiatan Infrastruktur: pemasangan infrastruktur publik
+                                                    seperti
+                                                    tiang listrik, kabel, atau pipa">Kegiatan Infrastruktur</option>
+                                            </select>
+                                        </div>
+                                        <div class="location flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <label
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                    for="location">
+                                                    Lokasi Kegiatan</label>
+                                                <p class="text-sm font-medium font-base text-brown/60">Masukkan nama
+                                                    lokasi
+                                                    kegiatan
+                                                    yang familiar dan spesifik</p>
+                                            </div>
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <div id="locationContainer"
+                                                    class="border <% if (error.participant) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 flex-auto flex items-center focus:outline-maroon/50 focus:outline-[3px]">
+                                                    <input
+                                                        class="text-sm font-base text-brown bg-transparent outline-none flex-auto h-10 px-4"
+                                                        type="text" id="locationInput" placeholder="" required autofocus
+                                                        autocomplete="off">
+                                                    <button type="button" id="searchLocation"
+                                                        class="group text-sm font-base text-brown px-4 border-l border-slate-300 h-10 leading-10 hover:bg-brown">
+                                                        <svg class="stroke-brown group-hover:stroke-white"
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="1.5" stroke-linecap="round"
+                                                            stroke-linejoin="round" class="lucide lucide-search">
+                                                            <circle cx="11" cy="11" r="8" />
+                                                            <path d="m21 21-4.3-4.3" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <input class="hidden" type="text" name="location" id="location" value="aa">
+                                                <p class="text-xs font-base font-medium text-red-500 leading-4">
+                                                    <%= error.location %>
+                                                </p>
+                                                <div id="map" class="border border-slate-300 h-80 z-0"></div>
+                                            </div>
+                                        </div>
+                                        <div class="startdate flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <label
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                    for="startdate">
+                                                    Tanggal Awal Kegiatan</label>
+                                                <p class="text-sm font-medium font-base text-brown/60">Izin pengajuan 7
+                                                    hari sebelum waktu pelaksanaan
+                                                </p>
+                                            </div>
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <input
+                                                    class="border <% if (error.startdate) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 px-4 focus:outline-maroon/50 focus:outline-[3px]"
+                                                    type="date" name="startdate" id="startdate" placeholder="" required
+                                                    autocomplete="off"
+                                                    value="<%= oldData.startdate || user.startdate %>">
+                                                <p class="text-xs font-base font-medium text-red-500 leading-4">
+                                                    <%= error.startdate %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="enddate flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <label class="text-xl font-semibold text-left font-base text-brown"
+                                                    for="enddate">
+                                                    Tanggal Akhir Kegiatan</label>
+                                                <p class="text-sm font-medium font-base text-brown/60">Masukkan tanggal
+                                                    akhir kegiatan jika kegiatan lebih dari satu hari, bersifat opsional
+                                                </p>
+                                            </div>
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <input
+                                                    class="border <% if (error.enddate) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 px-4 focus:outline-maroon/50 focus:outline-[3px]"
+                                                    type="date" name="enddate" id="enddate" placeholder=""
+                                                    autocomplete="off" value="<%= oldData.enddate || user.enddate %>">
+                                                <p class="text-xs font-base font-medium text-red-500 leading-4">
+                                                    <%= error.enddate %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="starttime flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <label
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                    for="starttime">
+                                                    Jam Awal Kegiatan</label>
+                                            </div>
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <input
+                                                    class="border <% if (error.starttime) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 px-4 focus:outline-maroon/50 focus:outline-[3px]"
+                                                    type="time" name="starttime" id="starttime" placeholder="" required
+                                                    autocomplete="off"
+                                                    value="<%= oldData.starttime || user.starttime %>">
+                                                <p class="text-xs font-base font-medium text-red-500 leading-4">
+                                                    <%= error.starttime %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="endtime flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <label
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                    for="endtime">
+                                                    Jam Akhir Kegiatan</label>
+                                            </div>
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <input
+                                                    class="border <% if (error.endtime) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 px-4 focus:outline-maroon/50 focus:outline-[3px]"
+                                                    type="time" name="endtime" id="endtime" placeholder="" required
+                                                    autocomplete="off" value="<%= oldData.endtime || user.endtime %>">
+                                                <p class="text-xs font-base font-medium text-red-500 leading-4">
+                                                    <%= error.endtime %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+    </form>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/js/textarea.js"></script>
+    <script src="/js/participant.js"></script>
+    <script src="/js/leaflet.js"></script>
+
+</body>
+
+</html>
