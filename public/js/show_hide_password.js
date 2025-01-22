@@ -2,13 +2,8 @@ var inputContainer = document.querySelector(".passwordContent");
 var input = document.querySelector(".passwordContent input");
 var icon = document.querySelector("#showHide");
 
-// console.log("🚀 ~ inputContainer:", inputContainer);
-// console.log("🚀 ~ input:", input);
-// console.log("🚀 ~ icons:", icon);
-
 input.addEventListener("focus", () => {
     inputContainer.style.outline = "rgb(232 129 110/.5) solid 3px";
-    console.log("FOCUS");
 });
 
 input.addEventListener("blur", () => {

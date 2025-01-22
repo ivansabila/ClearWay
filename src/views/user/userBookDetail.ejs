@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+
+<body class="bg-slate-100">
+    <div class="flex flex-col justify-between mainContainer bg-slate-100">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 flex-auto p-8 gap-10">
+                        <div class="flex justify-between">
+                            <div class="flex flex-col">
+                                <h1 class="text-3xl font-semibold text-left titleSidebar font-base text-brown">
+                                    Detail Izin Pengajuan</h1>
+                                <p class="text-sm font-medium font-base text-brown/60">Anda bertanggung jawab
+                                    sepenuhnya terhadap seluruh izin pengajuan yang anda ajukan</p>
+                            </div>
+
+                        </div>
+                        <div class="flex flex-col gap-10">
+                            <div class="border border-slate-300 p-6 flex flex-col gap-8">
+                                <div class="flex items-center gap-4">
+                                    <h1 class="text-2xl font-semibold text-left font-base text-brown">Data Pengajuan
+                                    </h1>
+                                    <a
+                                        class="w-fit px-2 py-1 text-xs font-medium font-base text-white bg-green-500 flex flex-row">
+                                        Menunggu
+                                    </a>
+                                </div>
+                                <div class="flex flex-col gap-6">
+                                    <div class="title flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <p
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Judul pengajuan</p>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-1">
+                                            <input
+                                                class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 px-4 focus:outline-maroon/50 focus:outline-[3px]"
+                                                type="text" name="title" id="title" placeholder=""
+                                                value="<%= data.title %>" disabled>
+
+                                        </div>
+                                    </div>
+                                    <div class="description flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <p
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                Deskripsi pengajuan</p>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-1">
+                                            <textarea id="description" name="description" rows="3" maxlength="100"
+                                                disabled
+                                                class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none px-4 py-2 min-h-40 max-h-40"><%= data.description %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="participant flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <label
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                for="participant">
+                                                Jumlah Peserta</label>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-2">
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <input
+                                                    class="border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 w-full px-4"
+                                                    type="text" name="participant" id="participant" disabled
+                                                    value="±<%= data.participant %> Peserta">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="event flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <label
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                for="event">
+                                                Jenis Kegiatan</label>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-2">
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <input
+                                                    class=" border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 w-full px-4"
+                                                    type="text" name="event" id="event" disabled
+                                                    value="<%= data.event %>">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="location flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <label
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                for="location">
+                                                Lokasi Kegiatan</label>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-2">
+                                            <div class="flex flex-col flex-auto gap-1">
+                                                <div id="map" class="border border-slate-300 h-80 z-0"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="startdate flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <label
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                for="startdate">
+                                                Tanggal Awal Kegiatan</label>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-1">
+                                            <input
+                                                class=" border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 w-full px-4"
+                                                type="text" name="startdate" id="startdate" disabled
+                                                value="<%= data.startdate %>">
+                                        </div>
+                                    </div>
+                                    <div class="enddate flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <label class="text-xl font-semibold text-left font-base text-brown"
+                                                for="enddate">
+                                                Tanggal Akhir Kegiatan</label>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-1">
+                                            <input
+                                                class=" border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 w-full px-4"
+                                                type="text" name="enddate" id="enddate" disabled
+                                                value="<%= data.enddate %>">
+                                        </div>
+                                    </div>
+                                    <div class="starttime flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <label
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                for="starttime">
+                                                Jam Awal Kegiatan</label>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-1">
+                                            <input
+                                                class=" border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 w-full px-4"
+                                                type="text" name="starttime" id="starttime" disabled
+                                                value="<%= data.starttime %> WITA">
+                                        </div>
+                                    </div>
+                                    <div class="endtime flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <label
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                for="endtime">
+                                                Jam Akhir Kegiatan</label>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-1">
+                                            <input
+                                                class=" border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 w-full px-4"
+                                                type="text" name="endtime" id="endtime" disabled
+                                                value="<%= data.endtime %> WITA">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        let coordinate = "<%= data.location %>"
+    </script>
+    <script src="/js/leaflet_show.js"></script>
+</body>
+
+</html>

@@ -566,12 +566,24 @@ video {
   position: sticky;
 }
 
+.-bottom-20 {
+  bottom: -5rem;
+}
+
 .left-0 {
   left: 0px;
 }
 
+.right-0 {
+  right: 0px;
+}
+
 .top-0 {
   top: 0px;
+}
+
+.z-0 {
+  z-index: 0;
 }
 
 .z-10 {
@@ -586,14 +598,6 @@ video {
   grid-row: span 3 / span 3;
 }
 
-.ml-72 {
-  margin-left: 18rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -602,8 +606,19 @@ video {
   margin-left: 0.5rem;
 }
 
-.mb-1 {
-  margin-bottom: 0.25rem;
+.ml-72 {
+  margin-left: 18rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .flex {
@@ -612,6 +627,10 @@ video {
 
 .grid {
   display: grid;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-10 {
@@ -628,6 +647,10 @@ video {
 
 .h-6 {
   height: 1.5rem;
+}
+
+.h-80 {
+  height: 20rem;
 }
 
 .h-96 {
@@ -647,8 +670,24 @@ video {
   height: 100vh;
 }
 
+.h-40 {
+  height: 10rem;
+}
+
+.max-h-40 {
+  max-height: 10rem;
+}
+
+.min-h-12 {
+  min-height: 3rem;
+}
+
 .min-h-96 {
   min-height: 24rem;
+}
+
+.min-h-40 {
+  min-height: 10rem;
 }
 
 .w-1\/2 {
@@ -692,6 +731,22 @@ video {
   width: 100vw;
 }
 
+.w-2\/3 {
+  width: 66.666667%;
+}
+
+.w-11\/12 {
+  width: 91.666667%;
+}
+
+.w-6\/12 {
+  width: 50%;
+}
+
+.w-40 {
+  width: 10rem;
+}
+
 .flex-auto {
   flex: 1 1 auto;
 }
@@ -706,6 +761,10 @@ video {
 
 .flex-row {
   flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
 }
 
 .flex-col {
@@ -758,6 +817,10 @@ video {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.gap-12 {
+  gap: 3rem;
 }
 
 .divide-y > :not([hidden]) ~ :not([hidden]) {
@@ -843,6 +906,10 @@ video {
   background-size: cover;
 }
 
+.stroke-brown {
+  stroke: #2F3E37;
+}
+
 .stroke-maroon {
   stroke: #E8816E;
 }
@@ -921,6 +988,10 @@ video {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .font-base {
   font-family: Space Grotesk;
 }
@@ -986,6 +1057,10 @@ video {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.leading-10 {
+  line-height: 2.5rem;
 }
 
 .leading-4 {
@@ -1055,6 +1130,10 @@ video {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.duration-500 {
+  transition-duration: 500ms;
 }
 
 .ease-in {
