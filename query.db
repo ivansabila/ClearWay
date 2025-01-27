@@ -43,10 +43,15 @@ CREATE TABLE books (
 	participant VARCHAR(50),
 	event VARCHAR(50),
 	location TEXT,
+	district VARCHAR(100),
+	subdistrict VARCHAR(100),
 	startdate VARCHAR(100),
 	enddate VARCHAR(100),
 	starttime VARCHAR(100),
 	endtime VARCHAR(100),
+	user_letter VARCHAR(100),
+	district_letter VARCHAR(100),
+	department_letter VARCHAR(100),
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )

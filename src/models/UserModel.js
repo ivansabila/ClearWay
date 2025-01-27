@@ -92,7 +92,30 @@ class User {
 
             await db.query(query, arrData);
         }
+    }
 
+    static async show_subdistrict(id) {
+        const query = "SELECT * FROM users WHERE id = $1";
+
+        let data = await db.query(query, [id]);
+
+        return data.rows[0];
+    }
+
+    static async show_district_users(subdistrict) {
+        const query = "SELECT * FROM users WHERE nik <> 'null' AND subdistrict = $1";
+
+        let data = await db.query(query, [subdistrict]);
+
+        return data.rows;
+    }
+
+    static async show_admin_users() {
+        const query = "SELECT * FROM users WHERE nik <> 'null'";
+
+        let data = await db.query(query);
+
+        return data.rows;
     }
 }
 

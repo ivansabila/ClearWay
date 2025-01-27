@@ -100,10 +100,10 @@
                                                     <p class="text-sm font-medium font-base text-brown/60 line-clamp-1">
                                                         <%= item.event %>
                                                     </p>
-                                                    <a
-                                                        class="w-fit px-2 py-1 mt-4 text-xs font-medium font-base text-white bg-green-500 flex flex-row">
+                                                    <p
+                                                        class="w-fit px-2 py-1 mt-4 text-xs font-medium font-base text-white flex flex-row <% if (item.status == 'Menunggu') { %> bg-blue-500 <% } else if (item.status == 'Ditolak') { %> bg-red-500 <% } else if (item.status == 'Kelurahan') { %> bg-yellow-500 <% } else if (item.status=='Dishub' ) { %> bg-orange <% } %>">
                                                         <%= item.status %>
-                                                    </a>
+                                                    </p>
                                                 </div>
                                                 <div class="flex flex-col divide-y divide-slate-300">
                                                     <div class="flex flex-row justify-between py-[2px]">
