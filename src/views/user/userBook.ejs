@@ -211,12 +211,43 @@
                                                         </svg>
                                                     </button>
                                                 </div>
-                                                <input class="hidden" type="text" name="location" id="location" value="aa">
+                                                <input class="hidden" type="text" name="location" id="location"
+                                                    value="aa">
                                                 <p class="text-xs font-base font-medium text-red-500 leading-4">
                                                     <%= error.location %>
                                                 </p>
                                                 <div id="map" class="border border-slate-300 h-80 z-0"></div>
                                             </div>
+                                        </div>
+                                        <div class="district flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <h1
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                    Kecamatan Kegiatan</h1>
+                                                <p class="text-sm font-medium font-base text-brown/60">Kecamatan sesuai
+                                                    lokasi kegiatan
+                                                </p>
+                                            </div>
+                                            <select
+                                                class="border <% if (error.district) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                                name="district" id="district" onchange="filterKelurahan()" required>
+                                                <option value="" disabled selected>-- Pilih Kecamatan --</option>
+                                            </select>
+                                        </div>
+                                        <div class="subdistrict flex justify-between items-start gap-40">
+                                            <div class="flex flex-col w-60">
+                                                <h1
+                                                    class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5">
+                                                    Kelurahan Kelurahan</h1>
+                                                <p class="text-sm font-medium font-base text-brown/60">Kelurahan sesuai
+                                                    lokasi kegiatan
+                                                </p>
+                                            </div>
+                                            <select
+                                                class="border <% if (error.subdistrict) { %> border-red-500 <% } else { %> border-slate-300 <% } %> text-sm font-base text-brown bg-transparent outline-none h-10 px-4 flex-auto focus:outline-maroon/50 focus:outline-[3px]"
+                                                name="subdistrict" id="subdistrict" required>
+                                                <option value="" disabled selected>-- Pilih Kelurahan --</option>
+                                            </select>
                                         </div>
                                         <div class="startdate flex justify-between items-start gap-40">
                                             <div class="flex flex-col w-60">
@@ -302,6 +333,11 @@
     </form>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        const defaultDistrict = "<%= oldData.district || user.district %>";
+        const defaultSubdistrict = "<%= oldData.subdistrict || user.subdistrict %>";    
+    </script>
+    <script src="/js/data_district_generate.js"></script>
     <script src="/js/textarea.js"></script>
     <script src="/js/participant.js"></script>
     <script src="/js/leaflet.js"></script>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body class="bg-slate-100">
+    <div class="flex flex-col justify-between mainContainer bg-slate-100">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 flex-auto p-8 gap-10">
+                        <div class="flex justify-between">
+                            <div class="flex flex-col">
+                                <h1 class="text-3xl font-semibold text-left titleSidebar font-base text-brown">
+                                    Izin Pengajuan</h1>
+                                <div class="flex flex-row items-center gap-1">
+                                    <p class="text-sm font-medium font-base text-brown/60">Terdapat 3 izin pengajuan
+                                        yang belum diperiksa</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <% if (data.length> 0) { %>
+                                <table class="box-border border-collapse table-fixed">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-base font-base font-medium bg-brown py-2 text-maroon w-10">#
+                                            </th>
+                                            <th
+                                                class="text-base text-left font-base font-medium text-white bg-brown py-2">
+                                                Judul Pengajuan</th>
+                                            <th
+                                                class="text-base text-left font-base font-medium text-white bg-brown py-2">
+                                                Jenis Kegiatan</th>
+                                            <th
+                                                class="text-base text-left font-base font-medium text-white bg-brown py-2">
+                                                Jumlah Peserta</th>
+                                            <th
+                                                class="text-base text-left font-base font-medium text-white bg-brown py-2">
+                                                Lokasi Pengajuan</th>
+                                            <th
+                                                class="text-base text-left font-base font-medium text-white bg-brown py-2">
+                                                Tanggal Kegiatan</th>
+                                            <th
+                                                class="text-base text-left font-base font-medium text-white bg-brown py-2">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% data.forEach((item, index)=> { %>
+                                            <tr>
+                                                <td
+                                                    class="text-sm font-base font-medium pt-2 text-brown text-center w-10">
+                                                    <%= index + 1 %>
+                                                </td>
+                                                <td class="text-sm text-left font-base font-medium text-brown pt-2">
+                                                    <%= item.title %>
+                                                </td>
+                                                <td class="text-sm text-left font-base font-medium text-brown pt-2">
+                                                    <%= item.event %>
+                                                </td>
+                                                <td class="text-sm text-left font-base font-medium text-brown pt-2">±<%=
+                                                        item.participant %> Peserta</td>
+                                                <td class="text-sm text-left font-base font-medium text-brown pt-2">
+                                                    <%= item.location %>
+                                                </td>
+                                                <td class="text-sm text-left font-base font-medium text-brown pt-2">
+                                                    <%= item.date %>
+                                                </td>
+                                                <td class="text-sm text-left font-base font-medium text-brown pt-2">
+                                                    <a class="w-fit px-4 py-1 text-sm font-medium font-base text-brown border border-slate-300 flex flex-row cursor-pointer items-center hover:bg-maroon hover:text-white"
+                                                        href="/admin/detail/<%= item.id %>">Lihat</a>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                                <% } else { %>
+                                    <div class="flex justify-center items-center gap-4 bg-slate-200/50 p-6 min-h-96">
+                                        <p class="text-sm font-medium font-base text-brown/60">Tidak ada pengajuan
+                                            sejauh ini</p>
+                                    </div>
+                                    <% } %>
+                        </div>
+                        <div id="toast"
+                            class="hidden fixed border border-slate-300 p-4 -bottom-20 right-0 w-full bg-green-500 text-base text-center font-base text-white transition-all duration-500">
+                            <%= message %>
+                        </div>
+                    </div>
+            </div>
+    </div>
+    <script>
+        const toastMessage = "<%= message %>"
+    </script>
+    <script src="/js/toast.js"></script>
+</body>
+
+</html>

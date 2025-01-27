@@ -7,16 +7,16 @@ const AuthZMiddleware = (req, res, next) => {
 
         console.log("🚀 ~ AuthZMiddleware ~ req.session.user:", req.session.user);
 
-        if (role === "subDistrict" && !originalUrl.startsWith("/subDistrict")) {
-            return res.redirect("/subDistrict");
+        if (role === "subdistrict" && !originalUrl.startsWith("/district")) {
+            return res.redirect("/district");
         }
 
-        if (role === "department" && !originalUrl.startsWith("/department")) {
-            return res.redirect("/department");
+        if (role === "admin" && !originalUrl.startsWith("/admin")) {
+            return res.redirect("/admin");
         }
 
-        if (role === "trafficPolice" && !originalUrl.startsWith("/trafficPolice")) {
-            return res.redirect("/trafficPolice");
+        if (role === "trafficpolice" && !originalUrl.startsWith("/trafficpolice")) {
+            return res.redirect("/trafficpolice");
         }
 
         return next();

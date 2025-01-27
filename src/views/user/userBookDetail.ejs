@@ -106,6 +106,34 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="district flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <label
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                for="district">
+                                                Kelurahan Kegiatan</label>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-1">
+                                            <input
+                                                class=" border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 w-full px-4"
+                                                type="text" name="district" id="district" disabled
+                                                value="<%= data.district %>">
+                                        </div>
+                                    </div>
+                                    <div class="subdistrict flex justify-between items-start gap-40">
+                                        <div class="flex flex-col w-60">
+                                            <label
+                                                class="text-xl font-semibold text-left font-base text-brown after:content-['*'] after:text-maroon after:ml-0.5"
+                                                for="subdistrict">
+                                                Kecamatan Kegiatan</label>
+                                        </div>
+                                        <div class="flex flex-col flex-auto gap-1">
+                                            <input
+                                                class=" border border-slate-300 text-sm font-base text-brown bg-transparent outline-none h-10 w-full px-4"
+                                                type="text" name="subdistrict" id="subdistrict" disabled
+                                                value="<%= data.subdistrict %>">
+                                        </div>
+                                    </div>
                                     <div class="startdate flex justify-between items-start gap-40">
                                         <div class="flex flex-col w-60">
                                             <label

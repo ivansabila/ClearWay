@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.use(AuthZMiddleware);
 router.get("/", DashboardController.index);
+router.get("/history", DashboardController.history);
 
 module.exports = router;

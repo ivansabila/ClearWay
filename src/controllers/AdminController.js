@@ -1,10 +1,16 @@
 const Book = require("../models/BookModel");
+const User = require("../models/UserModel");
+const capitalize = require("../utils/capitalize");
 
-class DashboardController {
+class DistrictController {
     static async index(req, res) {
-        const id = req.session.user.id;
+        // const subdistrict = req.session.user.email.split("@")[0];
+        const subdistrict = capitalize(req.session.user.email.split("@")[0]);
+        const today = new Date();
 
-        const data = await Book.show(id);
+        const objUser = { subdistrict, today };
+
+        const data = await Book.all_admin();
 
         let monthname = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jul", "Jun", "Agu", "Sep", "Okt", "Nov", "Des"];
         data.forEach((item) => {
@@ -38,13 +44,44 @@ class DashboardController {
         let message = req.session.user.message;
         req.session.user.message = null;
 
-        res.render("./user/userDashboard", { message: message, data: data, active: "book" });
+        res.render("./admin/adminDashboard", { message: message, data: data, active: "book" });
+    }
+
+    static async show(req, res) {
+        const { idbook } = req.params;
+
+        const data = await Book.show_subdistrict(idbook);
+        const datauser = await User.show_subdistrict(data.id_user);
+
+        res.render("./admin/adminBook", { data: data, datauser: datauser, active: "book" });
+    }
+
+    static async checked(req, res) {
+        const { idbook } = req.params;
+        const { action } = req.body;
+
+        if (action == "reject") {
+            const status = "ditolak";
+            const objUser = { idbook, status };
+
+            console.log("🚀 ~ DistrictController ~ checked ~ objUser:", objUser);
+            req.session.user.message = "Izin Pengajuan Anda Ditolak";
+
+            await Book.update_reject(objUser);
+        } else if (action == "accept") {
+            const status = "diterima";
+            const objUser = { idbook, status };
+
+            req.session.user.message = "Izin Pengajuan Anda Diterima";
+
+            await Book.update_accept_admin(objUser);
+        }
+
+        res.redirect("/district");
     }
 
     static async history(req, res) {
-        const id = req.session.user.id;
-
-        const data = await Book.show_history(id);
+        const data = await Book.show_admin_history();
 
         let monthname = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jul", "Jun", "Agu", "Sep", "Okt", "Nov", "Des"];
         data.forEach((item) => {
@@ -75,8 +112,14 @@ class DashboardController {
             }
         });
 
-        res.render("./user/userHistory", { data: data, active: "history" });
+        res.render("./admin/adminHistory", { data: data, active: "history" });
+    }
+
+    static async users(req, res) {
+        const data = await User.show_admin_users();
+
+        res.render("./admin/adminUsers", { data: data, active: "users" });
     }
 }
 
-module.exports = DashboardController;
+module.exports = DistrictController;
