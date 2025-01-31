@@ -4,7 +4,6 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "css": "npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch",
         "dev": "npm server.js"
     },
     "keywords": [],
